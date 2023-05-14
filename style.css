@@ -50,6 +50,10 @@ body {
 .board > [data-status="mine"] {
   background-color: red;
 }
+.board > [data-status="mine"]::after {
+  content: "\1F4A3";
+  font-size: 30px;
+}
 
 .board > [data-status="number"] {
   background-color: none;
@@ -57,4 +61,9 @@ body {
 
 .board > [data-status="marked"] {
   background-color: orange;
+  transition: linear 0.2s;
+}
+.board > [data-status="marked"]::after {
+  content: "\1F6A9";
+  font-size: 30px;
 }

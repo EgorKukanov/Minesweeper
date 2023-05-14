@@ -23,6 +23,11 @@ subtext.className = 'subtext';
 subtext.innerHTML = 'Mines Left: <span data-mine-count></span>';
 document.body.appendChild(subtext);
 
+const click = new Audio("mechanic-button.mp3");
+const mark = new Audio("flag.mp3");
+const explode = new Audio("explode.mp3")
+const congrads = new Audio("win.mp3")
+
 const boardSize = 10
 const numberOfMines = 10
 
@@ -36,11 +41,13 @@ for (let i = 0; i < board.length; i++) {
         const tile = board[i][j];
         boardElement.append(tile.element);
         tile.element.addEventListener("click", () => {
+            click.play();
             revealTile(board, tile);
             checkGameEnd();
         });
         tile.element.addEventListener("contextmenu", e => {
             e.preventDefault();
+            mark.play();
             markTile(tile);
             listMinesLeft();
         });
@@ -67,9 +74,11 @@ function checkGameEnd() {
     }
 
     if (win) {
+        congrads.play()
         messageText.textContent = "You Win!"
     }
     if (lose) {
+        explode.play()
         messageText.textContent = "You Lose"
         board.forEach(row => row.forEach(tile => {
             if (tile.status === tileStatus.MARKED) markTile(tile)
