@@ -63,7 +63,7 @@ function endGame() {
 
 
 const boardSize = 10
-const numberOfMines = 1
+const numberOfMines = 10
 
 const board = createBoard(boardSize, numberOfMines)
 const boardElement = document.querySelector(".board")

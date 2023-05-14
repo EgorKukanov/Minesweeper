@@ -28,7 +28,7 @@ body {
   padding: 10px;
   grid-template-columns: repeat(var(--size), 60px);
   grid-template-rows: repeat(var(--size), 60px);
-  gap: 4px;
+  gap: 6px;
   background-color: #777;
 }
 
@@ -46,10 +46,13 @@ body {
 .board > [data-status="hidden"] {
   background-color: #fff;
   cursor: pointer;
+  transition: linear 0.3s;
 }
 
 .board > [data-status="mine"] {
   background-color: red;
+  transition: linear 0.3s;
+  transform: scale(1.08);
 }
 .board > [data-status="mine"]::after {
   content: "\1F4A3";
@@ -62,7 +65,9 @@ body {
 
 .board > [data-status="marked"] {
   background-color: orange;
-  transition: linear 0.2s;
+  transition: linear 0.3s;
+  transform: scale(1.05);
+  cursor: pointer;
 }
 .board > [data-status="marked"]::after {
   content: "\1F6A9";
@@ -80,4 +85,37 @@ button {
 }
 .clicks {
   font-size: 20px;
+}
+
+@media screen and (max-width: 680px) {
+  body {
+    font-size: 2rem;
+  }
+  .board {
+    grid-template-columns: repeat(var(--size), 40px);
+    grid-template-rows: repeat(var(--size), 40px);
+    gap: 4px;
+  }
+  .board > [data-status="marked"]::after {
+    font-size: 22px;
+  }
+  .board > [data-status="mine"]::after {
+    font-size: 22px;
+  }
+}
+@media screen and (max-width: 470px) {
+  body {
+    font-size: 1.5rem;
+  }
+  .board {
+    grid-template-columns: repeat(var(--size), 30px);
+    grid-template-rows: repeat(var(--size), 30px);
+    gap: 3px;
+  }
+  .board > [data-status="marked"]::after {
+    font-size: 15px;
+  }
+  .board > [data-status="mine"]::after {
+    font-size: 15px;
+  }
 }
