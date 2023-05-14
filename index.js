@@ -47,13 +47,14 @@ let seconds = 0;
 let clicks = 0;
 
 const intervalId = setInterval(() => {
-    seconds++;
-    timerElement.innerHTML = `Timer: ${seconds} sec`;
-    clicksElement.innerHTML = `Clicks: ${clicks}`;
-}, 1000);
+    seconds += 0.1;
+    timerElement.innerHTML = `Timer: ${seconds.toFixed(1)} sec`;
+}, 100);
 
+clicksElement.innerHTML = `Clicks: ${clicks}`;
 document.addEventListener("click", () => {
-    clicks++;
+    ++clicks;
+    clicksElement.innerHTML = `Clicks: ${clicks}`;
 });
 
 function endGame() {
@@ -62,7 +63,7 @@ function endGame() {
 
 
 const boardSize = 10
-const numberOfMines = 10
+const numberOfMines = 1
 
 const board = createBoard(boardSize, numberOfMines)
 const boardElement = document.querySelector(".board")
@@ -108,10 +109,12 @@ function checkGameEnd() {
     }
 
     if (win) {
+        messageText.style.color = "green";
         congrads.play()
         messageText.textContent = "You Win!"
     }
     if (lose) {
+        messageText.style.color = "red";
         explode.play()
         messageText.textContent = "You Lose"
         board.forEach(row => row.forEach(tile => {
