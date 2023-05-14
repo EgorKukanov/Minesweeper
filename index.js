@@ -23,10 +23,43 @@ subtext.className = 'subtext';
 subtext.innerHTML = 'Mines Left: <span data-mine-count></span>';
 document.body.appendChild(subtext);
 
+const reloadButton = document.createElement("button");
+reloadButton.innerHTML = "Reset";
+document.body.appendChild(reloadButton);
+reloadButton.addEventListener("click", () => {
+    location.reload();
+});
+
+const timerElement = document.createElement("div");
+timerElement.className = 'timer'
+document.body.appendChild(timerElement);
+
+const clicksElement = document.createElement("div");
+clicksElement.className = 'clicks'
+document.body.appendChild(clicksElement);
+
 const click = new Audio("mechanic-button.mp3");
 const mark = new Audio("flag.mp3");
 const explode = new Audio("explode.mp3")
 const congrads = new Audio("win.mp3")
+
+let seconds = 0;
+let clicks = 0;
+
+const intervalId = setInterval(() => {
+    seconds++;
+    timerElement.innerHTML = `Timer: ${seconds} sec`;
+    clicksElement.innerHTML = `Clicks: ${clicks}`;
+}, 1000);
+
+document.addEventListener("click", () => {
+    clicks++;
+});
+
+function endGame() {
+    clearInterval(intervalId);
+}
+
 
 const boardSize = 10
 const numberOfMines = 10
@@ -71,6 +104,7 @@ function checkGameEnd() {
     if (win || lose) {
         boardElement.addEventListener("click", stopProp, { capture: true })
         boardElement.addEventListener("contextmenu", stopProp, { capture: true })
+        endGame()
     }
 
     if (win) {

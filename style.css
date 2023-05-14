@@ -67,3 +67,15 @@ body {
   content: "\1F6A9";
   font-size: 30px;
 }
+
+button {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.timer {
+  font-size: 20px;
+}
+.clicks {
+  font-size: 20px;
+}
