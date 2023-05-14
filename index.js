@@ -24,7 +24,7 @@ subtext.innerHTML = 'Mines Left: <span data-mine-count></span>';
 document.body.appendChild(subtext);
 
 const reloadButton = document.createElement("button");
-reloadButton.innerHTML = "Reset";
+reloadButton.innerHTML = "Restart";
 document.body.appendChild(reloadButton);
 reloadButton.addEventListener("click", () => {
     location.reload();
@@ -60,10 +60,16 @@ document.addEventListener("click", () => {
 function endGame() {
     clearInterval(intervalId);
 }
+let boardSize = 10
+let numberOfMines = 10
 
-
-const boardSize = 10
-const numberOfMines = 10
+// const sizeButton = document.createElement("button");
+// sizeButton.innerHTML = "15x15";
+// document.body.appendChild(sizeButton);
+// sizeButton.addEventListener("mousedown", () => {
+//     boardSize = 15;
+//     return boardSize;
+// });
 
 const board = createBoard(boardSize, numberOfMines)
 const boardElement = document.querySelector(".board")

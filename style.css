@@ -49,6 +49,11 @@ body {
   transition: linear 0.3s;
 }
 
+.board > [data-status="hidden"]:hover {
+  background-color: rgb(220, 219, 219);
+  transition: linear 0.2s;
+}
+
 .board > [data-status="mine"] {
   background-color: red;
   transition: linear 0.3s;
@@ -75,8 +80,16 @@ body {
 }
 
 button {
+  width: 90px;
+  height: 35px;
+  font-size: 20px;
   cursor: pointer;
   margin-bottom: 10px;
+  transition: linear 0.3s;
+}
+button:hover {
+  transition: linear 0.3s;
+  transform: scale(1.05);
 }
 
 .timer {
