@@ -63,14 +63,6 @@ function endGame() {
 let boardSize = 10
 let numberOfMines = 10
 
-// const sizeButton = document.createElement("button");
-// sizeButton.innerHTML = "15x15";
-// document.body.appendChild(sizeButton);
-// sizeButton.addEventListener("mousedown", () => {
-//     boardSize = 15;
-//     return boardSize;
-// });
-
 const board = createBoard(boardSize, numberOfMines)
 const boardElement = document.querySelector(".board")
 const minesLeftText = document.querySelector("[data-mine-count]")
