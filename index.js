@@ -23,13 +23,6 @@ subtext.className = 'subtext';
 subtext.innerHTML = 'Mines Left: <span data-mine-count></span>';
 document.body.appendChild(subtext);
 
-const reloadButton = document.createElement("button");
-reloadButton.innerHTML = "Restart";
-document.body.appendChild(reloadButton);
-reloadButton.addEventListener("click", () => {
-    location.reload();
-});
-
 const timerElement = document.createElement("div");
 timerElement.className = 'timer'
 document.body.appendChild(timerElement);
@@ -42,6 +35,35 @@ const click = new Audio("mechanic-button.mp3");
 const mark = new Audio("flag.mp3");
 const explode = new Audio("explode.mp3")
 const congrads = new Audio("win.mp3")
+
+const reloadButton = document.createElement("button");
+reloadButton.innerHTML = "Restart";
+document.body.appendChild(reloadButton);
+reloadButton.addEventListener("click", () => {
+    location.reload();
+});
+
+const themeSwitcher = document.createElement("input");
+themeSwitcher.type = "checkbox";
+themeSwitcher.id = "theme-switcher";
+
+const label = document.createElement("label");
+label.appendChild(themeSwitcher);
+label.appendChild(document.createTextNode("Dark mode"));
+
+document.body.appendChild(label);
+
+const body = document.body;
+
+themeSwitcher.addEventListener("change", () => {
+    if (themeSwitcher.checked) {
+        body.classList.add("light-theme");
+        label.childNodes[1].nodeValue = "Light mode";
+    } else {
+        body.classList.remove("light-theme");
+        label.childNodes[1].nodeValue = "Dark mode";
+    }
+});
 
 let seconds = 0;
 let clicks = 0;
