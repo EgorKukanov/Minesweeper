@@ -23,18 +23,34 @@ subtext.className = 'subtext';
 subtext.innerHTML = 'Mines Left: <span data-mine-count></span>';
 document.body.appendChild(subtext);
 
+let seconds = 0;
+
 const timerElement = document.createElement("div");
 timerElement.className = 'timer'
 document.body.appendChild(timerElement);
+
+const intervalId = setInterval(() => {
+    seconds += 0.1;
+    timerElement.innerHTML = `Timer: ${seconds.toFixed(1)} sec`;
+}, 100);
+
+
+function endGame() {
+    clearInterval(intervalId);
+}
 
 const clicksElement = document.createElement("div");
 clicksElement.className = 'clicks'
 document.body.appendChild(clicksElement);
 
-const click = new Audio("mechanic-button.mp3");
-const mark = new Audio("flag.mp3");
-const explode = new Audio("explode.mp3")
-const congrads = new Audio("win.mp3")
+let clicks = 0;
+
+document.querySelector('.board').addEventListener('click', function (event) {
+    if (event.target.tagName === 'DIV') {
+        ++clicks;
+        clicksElement.innerHTML = `Clicks: ${clicks}`;
+    }
+});
 
 const reloadButton = document.createElement("button");
 reloadButton.innerHTML = "Restart";
@@ -65,23 +81,11 @@ themeSwitcher.addEventListener("change", () => {
     }
 });
 
-let seconds = 0;
-let clicks = 0;
+const click = new Audio("mechanic-button.mp3");
+const mark = new Audio("flag.mp3");
+const explode = new Audio("explode.mp3")
+const congrads = new Audio("win.mp3")
 
-const intervalId = setInterval(() => {
-    seconds += 0.1;
-    timerElement.innerHTML = `Timer: ${seconds.toFixed(1)} sec`;
-}, 100);
-
-clicksElement.innerHTML = `Clicks: ${clicks}`;
-document.addEventListener("click", () => {
-    ++clicks;
-    clicksElement.innerHTML = `Clicks: ${clicks}`;
-});
-
-function endGame() {
-    clearInterval(intervalId);
-}
 let boardSize = 10
 let numberOfMines = 10
 
