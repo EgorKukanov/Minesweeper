@@ -44,8 +44,9 @@ clicksElement.className = 'clicks'
 document.body.appendChild(clicksElement);
 
 let clicks = 0;
+const boardElement = document.querySelector(".board")
 
-document.querySelector('.board').addEventListener('click', function (event) {
+boardElement.addEventListener('click', function (event) {
     if (event.target.tagName === 'DIV') {
         ++clicks;
         clicksElement.innerHTML = `Clicks: ${clicks}`;
@@ -90,7 +91,6 @@ let boardSize = 10
 let numberOfMines = 10
 
 const board = createBoard(boardSize, numberOfMines)
-const boardElement = document.querySelector(".board")
 const minesLeftText = document.querySelector("[data-mine-count]")
 const messageText = document.querySelector(".subtext")
 
@@ -109,6 +109,19 @@ for (let i = 0; i < board.length; i++) {
             markTile(tile);
             listMinesLeft();
         });
+        var timer;
+        tile.element.addEventListener("touchstart", e => {
+            timer = setTimeout(function () {
+                e.preventDefault();
+                mark.play();
+                markTile(tile);
+                listMinesLeft();
+            }, 500);
+        }, false);
+        tile.element.addEventListener('touchend', function (e) {
+            clearTimeout(timer);
+        }, false);
+
     }
 }
 boardElement.style.setProperty("--size", boardSize)
