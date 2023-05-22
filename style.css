@@ -104,6 +104,18 @@ button:hover {
 .clicks {
   font-size: 20px;
 }
+.score {
+  margin: 13px;
+  right: 0;
+  position: absolute;
+  top: 85%;
+}
+.grade {
+  margin: 13px;
+  position: absolute;
+  left: 0;
+  top: 85%;
+}
 body {
   transition: background-color 0.5s linear;
 }
@@ -147,6 +159,12 @@ label:hover {
   .board > [data-status="mine"]::after {
     font-size: 22px;
   }
+  .score {
+    top: 60%;
+  }
+  .grade {
+    top: 60%;
+  }
 }
 @media screen and (max-width: 470px) {
   body {
@@ -162,5 +180,11 @@ label:hover {
   }
   .board > [data-status="mine"]::after {
     font-size: 15px;
+  }
+  .score {
+    top: 49%;
+  }
+  .grade {
+    top: 49%;
   }
 }

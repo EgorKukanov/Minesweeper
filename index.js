@@ -24,6 +24,9 @@ subtext.innerHTML = 'Mines Left: <span data-mine-count></span>';
 document.body.appendChild(subtext);
 
 let seconds = 0;
+let clicks = 0;
+let score = 0;
+let grade = "A+!";
 
 const timerElement = document.createElement("div");
 timerElement.className = 'timer'
@@ -34,16 +37,10 @@ const intervalId = setInterval(() => {
     timerElement.innerHTML = `Timer: ${seconds.toFixed(1)} sec`;
 }, 100);
 
-
-function endGame() {
-    clearInterval(intervalId);
-}
-
 const clicksElement = document.createElement("div");
 clicksElement.className = 'clicks'
 document.body.appendChild(clicksElement);
 
-let clicks = 0;
 const boardElement = document.querySelector(".board")
 
 boardElement.addEventListener('click', function (event) {
@@ -52,6 +49,23 @@ boardElement.addEventListener('click', function (event) {
         clicksElement.innerHTML = `Clicks: ${clicks}`;
     }
 });
+
+const scoreElement = document.createElement("div");
+scoreElement.className = 'score';
+document.body.appendChild(scoreElement);
+boardElement.addEventListener('click', function (event) {
+    if (event.target.tagName === 'DIV') {
+        score = Math.round(1000000 / (clicks * seconds));
+    }
+});
+
+const gradeElement = document.createElement("div");
+gradeElement.className = 'grade';
+document.body.appendChild(gradeElement);
+
+function endGame() {
+    clearInterval(intervalId);
+}
 
 const reloadButton = document.createElement("button");
 reloadButton.innerHTML = "Restart";
@@ -139,6 +153,25 @@ function checkGameEnd() {
     const win = checkWin(board)
     const lose = checkLose(board)
 
+    if (score >= 4000) {
+        grade = "A+!";
+    }
+    if (score >= 2000 && score <= 3999) {
+        grade = "A";
+    }
+    if (score >= 1000 && score <= 1999) {
+        grade = "B";
+    }
+    if (score >= 500 && score <= 999) {
+        grade = "C";
+    }
+    if (score >= 100 && score <= 499) {
+        grade = "D";
+    }
+    if (score >= 1 && score <= 99) {
+        grade = "E";
+    }
+
     if (win || lose) {
         boardElement.addEventListener("click", stopProp, { capture: true })
         boardElement.addEventListener("contextmenu", stopProp, { capture: true })
@@ -147,9 +180,14 @@ function checkGameEnd() {
 
     if (win) {
         messageText.style.color = "green";
-        congrads.play()
-        messageText.textContent = "You Win!"
+        congrads.play();
+        messageText.textContent = "You Win!";
+        score = Math.round(1000000 / (clicks * seconds));
+        scoreElement.innerHTML = `Score: ${score}`;
+        gradeElement.innerHTML = `Grade: ${grade}`;
+
     }
+
     if (lose) {
         messageText.style.color = "red";
         explode.play()
@@ -157,6 +195,10 @@ function checkGameEnd() {
         board.forEach(row => row.forEach(tile => {
             if (tile.status === tileStatus.MARKED) markTile(tile)
             if (tile.mine) revealTile(board, tile)
+            score = 0
+            grade = "-"
+            scoreElement.innerHTML = `Score: ${score}`;
+            gradeElement.innerHTML = `Grade: ${grade}`;
         }))
     }
 }
