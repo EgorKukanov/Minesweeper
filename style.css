@@ -181,10 +181,4 @@ label:hover {
   .board > [data-status="mine"]::after {
     font-size: 15px;
   }
-  .score {
-    top: 49%;
-  }
-  .grade {
-    top: 49%;
-  }
 }
